@@ -1,0 +1,19 @@
+{
+  "name": "ocr-scan-component",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Cloudflare Worker that scans type labels / Seeschiff plates for serial numbers and returns plain text",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "types": "wrangler types",
+    "check": "tsc --noEmit",
+    "test": "node --experimental-strip-types --test src/extract.test.ts"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260831.1",
+    "typescript": "^5.9.2",
+    "wrangler": "^4.128.0"
+  }
+}
