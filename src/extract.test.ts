@@ -42,4 +42,5 @@ test("requires the whole candidate to match", () => {
   assert.equal(SERIAL_NUMBER_PATTERN.test("AB-12.1234-12P extra"), false);
   assert.equal(SERIAL_NUMBER_PATTERN.test("prefix AB-12.1234-12P"), true);
   assert.equal(SERIAL_NUMBER_PATTERN.test("AB-1.1234-12"), false);
+  assert.equal(SERIAL_NUMBER_PATTERN.test("AB-12.1234-12p"), false);
 });

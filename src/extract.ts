@@ -15,10 +15,9 @@ const SERIAL_NUMBER_SOURCE =
  */
 export const SERIAL_NUMBER_PATTERN = new RegExp(
   `^${SERIAL_NUMBER_SOURCE}$`,
-  "i",
 );
 
-const SERIAL_NUMBER_SEARCH_PATTERN = new RegExp(SERIAL_NUMBER_SOURCE, "i");
+const SERIAL_NUMBER_SEARCH_PATTERN = new RegExp(SERIAL_NUMBER_SOURCE);
 const SERIAL_LABEL_PREFIX =
   /^(?:seriennummer|serial\s*(?:no\.?|number|#)?|s\/?n|snr|fabrikat(?:ions)?nr\.?|werknummer|ident(?:ifikation)?(?:\s*[-.]?\s*n[ro]\.?)?)\s*[:#]?\s*/i;
 
@@ -33,8 +32,7 @@ function cleanCandidate(value: string): string {
   return value
     .trim()
     .replace(/^[:#\s]+/, "")
-    .replace(/[,;]+$/, "")
-    .toUpperCase();
+    .replace(/[,;]+$/, "");
 }
 
 function isPlausibleSerial(value: string): boolean {
