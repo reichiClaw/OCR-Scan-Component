@@ -2,6 +2,8 @@
 
 Cloudflare Worker + embeddable widget that scans **Typenschild / type labels / Seeschiff** plates, extracts the **serial number**, and returns it as **plain text** for any website or web app.
 
+For complete deployment, integration, security, framework, and troubleshooting instructions, see the [Integration Guide](INTEGRATION_GUIDE.md).
+
 ## Is this possible?
 
 Yes. The Worker accepts a photo (camera or upload), runs vision OCR via **Cloudflare Workers AI**, extracts the serial, and responds with plain text. Other sites integrate via a small `<script>` tag or a direct `POST /scan` API call (CORS enabled).
