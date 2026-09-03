@@ -13,7 +13,7 @@ Yes. The Worker accepts a photo (camera or upload), runs vision OCR via **Cloudf
 | `POST /scan` | Image in → serial number out (`text/plain` by default) |
 | Workers AI (Moondream, Llama vision fallback) | Reads text from the type-label photo |
 | `embed.js` | Drop-in camera / upload UI for third-party sites |
-| Regex post-processor | Pulls `Seriennummer` / `S/N` / Seeschiff identifiers from OCR text |
+| Regex post-processor | Returns only serials matching the required format |
 
 ## Quick start
 
@@ -45,8 +45,14 @@ curl -X POST https://<your-worker>.workers.dev/scan \
   -F "image=@typenschild.jpg"
 ```
 
-Response body is only the serial, e.g. `SS-2024-88421`  
+Response body is only the serial, e.g. `SS-24.12345-884P`  
 HTTP `404` with empty body if nothing was found.
+
+Only complete values matching this pattern are accepted:
+
+```regex
+^[(A-Za-z0-9\s)\-+]{2,}-[0-9]{2,3}\.[0-9]{4,6}-[0-9]{2,5}P?$
+```
 
 ### JSON mode
 
@@ -58,7 +64,7 @@ curl -X POST "https://<your-worker>.workers.dev/scan?format=json" \
 
 ```json
 {
-  "serial": "SS-2024-88421",
+  "serial": "SS-24.12345-884P",
   "confidence": "high",
   "found": true,
   "rawText": "...",
@@ -72,7 +78,7 @@ curl -X POST "https://<your-worker>.workers.dev/scan?format=json" \
 ```bash
 curl -X POST https://<your-worker>.workers.dev/scan \
   -H "Content-Type: application/json" \
-  -d '{"text":"Typenschild Seeschiff\\nSeriennummer: SS-2024-88421"}'
+  -d '{"text":"Typenschild Seeschiff\\nSeriennummer: SS-24.12345-884P"}'
 ```
 
 Accepted image inputs:

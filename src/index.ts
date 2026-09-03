@@ -165,7 +165,7 @@ async function handleScan(request: Request, env: Env, url: URL): Promise<Respons
   const authError = authorize(request, env);
   if (authError) return authError;
 
-  // Dev/test path: POST { "text": "Seriennummer: ABC-123" } skips vision
+  // Dev/test path: POST { "text": "Seriennummer: AB-12.1234-12P" } skips vision
   const contentType = request.headers.get("Content-Type") || "";
   if (contentType.includes("application/json")) {
     const clone = request.clone();
